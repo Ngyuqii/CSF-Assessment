@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Subject, firstValueFrom } from 'rxjs';
 import { Review } from '../models';
 
-const SB_URL = "http://localhost:8080/api/reviews"
+//const SB_URL = "http://localhost:8080/api/reviews"
 //Railway
-//const SB_URL = 
+const SB_URL = "csf-assessment-production-e3de.up.railway.app/api/reviews"
 
 @Injectable()
 export class ReviewService {
