@@ -1,0 +1,25 @@
+<div class="box">
+    
+<h3>Search Movie Reviews</h3>
+
+<form [formGroup]="form" (ngSubmit)="searchMovie()">
+    <table>
+        <tr>
+            <td>Movie Name:</td>
+            <td>
+                <input type="text" size="30" formControlName="movie">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" [disabled]="invalidEntry()">
+                Search</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</div>
+
+<router-outlet></router-outlet>
+

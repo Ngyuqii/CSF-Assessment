@@ -1,0 +1,26 @@
+<h1>Search Result &nbsp;&nbsp;&nbsp;&nbsp;
+    <button [routerLink]="['/']">Back</button>
+</h1>
+
+<div *ngIf="reviews$ | async; else noReview">
+<div *ngFor="let r of reviews$ | async" class="layout">
+    <div *ngIf="!!r.image">
+        <img src={{r.image}} alt="Movie Image" width="250px">
+    </div>
+    <div *ngIf="!r.image">
+        <img src="assets/placeholder.jpg" alt="Movie Image" width="250px">
+    </div>
+  <h3>
+    <a [href]="r.url" target="_blank">{{ r.title }} - {{r.rating}}</a>
+  </h3>
+  <h4>{{ r.headline }}</h4>
+  <p>{{ r. summary }}</p>
+  <p> Comments: 0</p>
+  <button [routerLink]="['/addcomment']">Comment</button>
+</div>
+
+</div>
+
+<ng-template #noReview>
+  <h3>Your search produces no result</h3>
+</ng-template>
