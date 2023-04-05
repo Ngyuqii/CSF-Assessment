@@ -68,10 +68,8 @@ public class MovieController {
         return ResponseEntity.ok(resp.toString());
         }
         catch (Exception e){
-        
             return ResponseEntity.ok(e.toString());
         }
 
     }
-
 }

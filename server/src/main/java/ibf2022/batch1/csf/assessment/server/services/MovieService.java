@@ -71,7 +71,7 @@ public class MovieService {
 	}
 
 	//Method to save bson into Mongodb
-    //Generate and return orderId
+    //Generate and return commentId
     public String save(Comment comment) {
 		String commentId = UUID.randomUUID().toString().substring(0, 8);
 		comment.setCommentId(commentId);

@@ -13,17 +13,16 @@ public class MovieRepository {
 	@Autowired
     private MongoTemplate template;
 
-	
 	//Method to convert json object to bson and insert into Mongodb
     //Datatbase moviereviews, Collection comments
     //db.comments.insert({Document})
     public void save (Comment comment) {
 		Document doc = comment.toDocument();
         System.out.printf(">>>DOC: %s", doc);
-        template.insert(doc, "comment");
+        template.insert(doc, "comments");
         
     }
-	
+
 	public int countComments(Object param) {
 		return 0;
 	}
