@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import { CommentPosted } from '../models';
 
-const SB_URL = "http://localhost:8080/comment"
+const SB_URL = "http://localhost:8080/api/comment"
 
 @Injectable()
 export class CommentService {

@@ -3,7 +3,9 @@ package ibf2022.batch1.csf.assessment.server.services;
 import java.io.StringReader;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -13,7 +15,9 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ibf2022.batch1.csf.assessment.server.models.Comment;
 import ibf2022.batch1.csf.assessment.server.models.Review;
+import ibf2022.batch1.csf.assessment.server.repositories.MovieRepository;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
@@ -21,6 +25,9 @@ import jakarta.json.JsonReader;;
 
 @Service
 public class MovieService {
+
+	@Autowired
+    private MovieRepository movieRepo;
 	
 	//URL = https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=minions&api-key={API_Key}
 	public static final String REVIEWS_API = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
@@ -61,6 +68,15 @@ public class MovieService {
             .map(v -> Review.createReview(v))
             .toList();
 
+	}
+
+	//Method to save bson into Mongodb
+    //Generate and return orderId
+    public String save(Comment comment) {
+		String commentId = UUID.randomUUID().toString().substring(0, 8);
+		comment.setCommentId(commentId);
+		movieRepo.save(comment);
+		return commentId;
 	}
 
 }
