@@ -9,8 +9,12 @@ export interface Review {
   commentCount: number;
   }
 
-  export interface Comment {
-    name: string;
-    rating: number;
-    comment: string;
+export interface Comment {
+  name: string;
+  rating: number;
+  comment: string;
+}
+
+export interface CommentPosted {
+	commentId: string
 }

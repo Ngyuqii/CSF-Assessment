@@ -9,6 +9,7 @@ import { SearchreviewComponent } from './components/searchreview/searchreview.co
 import { PostcommentComponent } from './components/postcomment/postcomment.component';
 import { MoviereviewslistComponent } from './components/moviereviewslist/moviereviewslist.component';
 import { ReviewService } from './service/review.service';
+import { CommentService } from './service/comment.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ReviewService } from './service/review.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ReviewService],
+  providers: [ReviewService, CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
