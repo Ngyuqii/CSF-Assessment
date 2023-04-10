@@ -28,12 +28,11 @@ export class SearchreviewComponent implements OnInit {
     return this.form.invalid || formEntry.length<2;
   }
 
-  //Retrieve form values and add them into cities array
-  //Return user to listcity page
+  //Retrieve form value
+  //Nagivate user to reviews/{movie} page
   searchMovie(): void {
     const movieResult = this.form.value.movie;
     console.info(`>>>Inputs: ${movieResult}`);
-    this.reviewSvc.getMovieReviews(movieResult);
     this.router.navigate(['/reviews', movieResult])
   }
 }

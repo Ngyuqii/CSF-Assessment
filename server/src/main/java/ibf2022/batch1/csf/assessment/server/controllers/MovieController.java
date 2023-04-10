@@ -29,7 +29,7 @@ public class MovieController {
 	@Autowired
 	private MovieService movieSvc;
 
-	@GetMapping(path="/reviews/{movie}")
+	@GetMapping(path="/search/{movie}")
     @ResponseBody
     public ResponseEntity<String> callAPI(@PathVariable String movie) {
 
@@ -59,7 +59,7 @@ public class MovieController {
         JsonObject jsonObj = Comment.fromString(payload);
         Comment comment = Comment.createCommment(jsonObj);
 
-        try{String commentId = movieSvc.save(comment);
+        try{String commentId = movieSvc.saveComment(comment);
 
         JsonObject resp = Json.createObjectBuilder()
             .add("commentId", commentId)

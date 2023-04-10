@@ -87,6 +87,7 @@ public class Review {
 			.add("summary", getSummary())
             .add("url", getReviewURL())
 			.add("image", getImage())
+			.add("commentCount", getCommentCount())
             .build();
     }
 

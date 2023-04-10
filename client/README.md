@@ -1,5 +1,7 @@
 ### API Call and Response
-URL = http://localhost:8080/api/reviews/minion
+
+1. GET
+URL = http://localhost:8080/api/search/minion
 ```
 [
     {
@@ -39,4 +41,15 @@ URL = http://localhost:8080/api/reviews/minion
         "image": "NA"
     }
 ]
+```
+
+2. POST
+URL = "http://localhost:8080/api/comment"
+```
+{
+    movieTitle: 'Minions: The Rise of Gru',
+    name: 'Ace',
+    rating: 5,
+    comment: 'Great Comedy'
+}
 ```

@@ -29,8 +29,9 @@ export class MoviereviewslistComponent implements OnInit, OnDestroy {
         }
       );
 
-      //Subscribes to the onMovieReviews observable in the review service
+      //Get movie reviews and subscribe to the onMovieReviews observable in the review service
       //When new reviews are emitted by the observable, reviews$ is updated with the new value
+      this.reviewSvc.getMovieReviews(this.movie);
       this.reviewSvc.onMovieReviews.subscribe(
         p => {
           console.info(">>>Subscribing to server.");

@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {firstValueFrom} from "rxjs";
-import { CommentPosted } from '../models';
+import { Comment, CommentPosted } from '../models';
 
 const SB_URL = "http://localhost:8080/api/comment"
+//Railway
+//const SB_URL = "https://csf-assessment-production-e3de.up.railway.app/api/comment"
 
 @Injectable()
 export class CommentService {
@@ -11,7 +13,7 @@ export class CommentService {
   constructor(private http: HttpClient) { }
 
   //Method to make a HTTP POST request to the server
-  //Returns a Promise of OrderPlaced object and print console.info statement if promise is resolved
+  //Returns a Promise of CommentPosted object and print console.info statement if promise is resolved
   postComment(comment: Comment): Promise<CommentPosted> {
 
 		return firstValueFrom(

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Subject, firstValueFrom } from 'rxjs';
 import { Review } from '../models';
 
-//const SB_URL = "http://localhost:8080/api/reviews"
+const SB_URL = "http://localhost:8080/api/search"
 //Railway
-const SB_URL = "csf-assessment-production-e3de.up.railway.app/api/reviews"
+//const SB_URL = "https://csf-assessment-production-e3de.up.railway.app/api/search"
 
 @Injectable()
 export class ReviewService {
@@ -18,7 +18,7 @@ export class ReviewService {
   //Returns a Promise of an array of object
   getMovieReviews(movie: string): Promise<Review[]> {
 
-    console.info(`>>> Country: ${movie}`);
+    console.info(`>>> Movie search: ${movie}`);
     
     //Method to retrieve data and cast to Review[]
     //Emit the data to subscribers of onMovieReviews subject

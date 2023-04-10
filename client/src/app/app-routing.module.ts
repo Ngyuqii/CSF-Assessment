@@ -7,7 +7,7 @@ import { PostcommentComponent } from './components/postcomment/postcomment.compo
 const routes: Routes = [
   {path:'', component: SearchreviewComponent}, //localhost:4200
   {path:'reviews/:movie', component: MoviereviewslistComponent}, //localhost:4200/reviews/{movie}
-  {path:'addcomment', component: PostcommentComponent}, //localhost:4200/addcomment
+  {path:'addcomment/:movietitle', component: PostcommentComponent}, //localhost:4200/addcomment/{movietitle}
   {path: '**', redirectTo: '/', pathMatch:"full"} //redirect to localhost:4200
 ];
 

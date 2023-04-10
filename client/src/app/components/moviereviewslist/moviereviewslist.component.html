@@ -4,19 +4,19 @@
 
 <div *ngIf="reviews$ | async; else noReview">
 <div *ngFor="let r of reviews$ | async" class="layout">
-    <div *ngIf="!!r.image">
-        <img src={{r.image}} alt="Movie Image" width="250px">
+    <div *ngIf="r.image=='NA'; else image">
+      <img src="assets/placeholder.jpg" alt="Movie Image" width="130px">
     </div>
-    <div *ngIf="!r.image">
-        <img src="assets/placeholder.jpg" alt="Movie Image" width="250px">
-    </div>
+    <ng-template #image>
+      <img src={{r.image}} alt="Movie Image" width="250px">
+    </ng-template>
   <h3>
     <a [href]="r.url" target="_blank">{{ r.title }} - {{r.rating}}</a>
   </h3>
   <h4>{{ r.headline }}</h4>
   <p>{{ r. summary }}</p>
-  <p> Comments: 0</p>
-  <button [routerLink]="['/addcomment']">Comment</button>
+  <p> Comments: {{ r. commentCount }}</p>
+  <button [routerLink]="['/addcomment', r.title]">Comment</button>
 </div>
 
 </div>

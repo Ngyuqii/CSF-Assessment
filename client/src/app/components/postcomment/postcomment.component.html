@@ -1,6 +1,8 @@
+<div class="box">
+
 <form [formGroup]="form" (ngSubmit)="postNewComment()">
 
-    <h2>Post Comment</h2>
+    <h2>Post Comment for {{movieName}}</h2>
 
         <tr>
             <td>Name:</td>
@@ -36,9 +38,11 @@
             </td>
         </tr>
 
-    </form>
+</form>
 
-    <br><br>
-    <div>
-        {{ obs | async | json }}
-    </div>
+<br><br>
+<div>
+    {{ obs | async | json }}
+</div>
+
+</div>

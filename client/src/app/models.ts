@@ -10,6 +10,7 @@ export interface Review {
   }
 
 export interface Comment {
+  movieTitle: string;
   name: string;
   rating: number;
   comment: string;

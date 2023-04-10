@@ -1,17 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { CommentService } from 'src/app/service/comment.service';
+import { Comment } from '../../models';
 
 @Component({
   selector: 'app-postcomment',
   templateUrl: './postcomment.component.html',
   styleUrls: ['./postcomment.component.css']
-})
+}) 
 
-export class PostcommentComponent implements OnInit {
+export class PostcommentComponent implements OnInit, OnDestroy {
 
-  constructor(private fb: FormBuilder, private commentSvc: CommentService){ }
+  movieName = "";
+  param$!: Subscription;
+
+  constructor(private fb: FormBuilder, private commentSvc: CommentService, 
+    private router: Router, private activatedRoute: ActivatedRoute){ }
 
   form!: FormGroup;
   obs!: Observable<any>; //to see what is commented
@@ -21,6 +27,14 @@ export class PostcommentComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.createForm();
     this.obs = this.form.valueChanges;
+
+    //Read path variable {movie}
+    this.param$ = this.activatedRoute.params.subscribe(
+      params => {
+        this.movieName = params["movietitle"];
+        console.log(">>>>PV: ", this.movieName);
+      }
+    );
   }
 
   //Method to create a form with form controls and validators
@@ -46,16 +60,24 @@ export class PostcommentComponent implements OnInit {
   //Method upon ngSubmit to retrieve values of the form controls and set into Comment object
   //Post comment to server and resets form else return error
   postNewComment() {
-    const newComment = this.form.value as Comment;
+    const newComment = {"movieTitle":this.movieName, ...(this.form.value)} as Comment;
+    // newComment.movieTitle = this.movieName;
+    console.log(">>>> NewComment", newComment);
 
     this.commentSvc.postComment(newComment)
 			.then(result => {
 				alert(`Comment id ${result.commentId} is posted.`);
-				this.clearData(); //use child's method clearData
+				this.clearData();
+        this.router.navigate(['/'])
 			})
 			.catch(error => {
 				alert(`ERROR! ${JSON.stringify(error)}`)
 			})
+  }
+
+  //Unsubscribe to observable
+  ngOnDestroy(): void {
+    this.param$.unsubscribe();
   }
 
 }

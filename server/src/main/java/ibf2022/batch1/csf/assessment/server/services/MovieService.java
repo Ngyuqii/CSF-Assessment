@@ -63,19 +63,26 @@ public class MovieService {
 		JsonReader reader = Json.createReader(new StringReader(payload));
         JsonObject reviewResponse = reader.readObject();
         JsonArray jsonArr = reviewResponse.getJsonArray("results");
+
+		//Convert jsonArray to list of Review objects
+		//Find document count and set as comment count
         return jsonArr.stream()
             .map(v -> (JsonObject)v)
             .map(v -> Review.createReview(v))
+			.map(v -> {
+				int count = movieRepo.countComments(v.getTitle());
+				v.setCommentCount(count);
+				return v;
+			})
             .toList();
-
 	}
 
-	//Method to save bson into Mongodb
+	//Method to save document into Mongodb
     //Generate and return commentId
-    public String save(Comment comment) {
+    public String saveComment(Comment comment) {
 		String commentId = UUID.randomUUID().toString().substring(0, 8);
 		comment.setCommentId(commentId);
-		movieRepo.save(comment);
+		movieRepo.saveComment(comment);
 		return commentId;
 	}
 
