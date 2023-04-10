@@ -23,12 +23,12 @@ export class PostcommentComponent implements OnInit, OnDestroy {
   obs!: Observable<any>; //to see what is commented
 
   //Initialize form creation
-  //Observable emits event on every value change of the form with a delay of 500ms
+  //Observable emits event on every value change of the form
   ngOnInit(): void {
     this.form = this.createForm();
     this.obs = this.form.valueChanges;
 
-    //Read path variable {movie}
+    //Read path variable {movietitle}
     this.param$ = this.activatedRoute.params.subscribe(
       params => {
         this.movieName = params["movietitle"];
@@ -57,18 +57,24 @@ export class PostcommentComponent implements OnInit, OnDestroy {
 		this.form = this.createForm();
 	}
 
+  //Method to return to list of reviews
+  toReviewsList(){
+    const search = localStorage.getItem("searchKey");
+    this.router.navigate(['/reviews', search]);
+  }
+
   //Method upon ngSubmit to retrieve values of the form controls and set into Comment object
-  //Post comment to server and resets form else return error
+  //Post comment to server, resets form and returns to reviewslist else return error message
   postNewComment() {
+    //newComment.movieTitle = this.movieName;
     const newComment = {"movieTitle":this.movieName, ...(this.form.value)} as Comment;
-    // newComment.movieTitle = this.movieName;
     console.log(">>>> NewComment", newComment);
 
     this.commentSvc.postComment(newComment)
 			.then(result => {
 				alert(`Comment id ${result.commentId} is posted.`);
 				this.clearData();
-        this.router.navigate(['/'])
+        this.toReviewsList();
 			})
 			.catch(error => {
 				alert(`ERROR! ${JSON.stringify(error)}`)

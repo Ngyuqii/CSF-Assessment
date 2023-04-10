@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import { Comment, CommentPosted } from '../models';
 
-const SB_URL = "http://localhost:8080/api/comment"
+//const SB_URL = "http://localhost:8080/api/comment"
 //Railway
-//const SB_URL = "https://csf-assessment-production-e3de.up.railway.app/api/comment"
+const SB_URL = "https://csf-assessment-production-e3de.up.railway.app/api/comment"
 
 @Injectable()
 export class CommentService {

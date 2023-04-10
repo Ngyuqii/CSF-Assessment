@@ -34,7 +34,7 @@ export class MoviereviewslistComponent implements OnInit, OnDestroy {
       this.reviewSvc.getMovieReviews(this.movie);
       this.reviewSvc.onMovieReviews.subscribe(
         p => {
-          console.info(">>>Subscribing to server.");
+          console.info(">>>Subscrib to server.");
           this.reviews$ = p;
         }
       )

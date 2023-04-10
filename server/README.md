@@ -54,3 +54,23 @@ URL = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=minions&a
   ]
 }
 ```
+
+### Mongo Database
+Database moviereviews
+
+1. Get count
+```
+db.comments.find({
+  movieTitle: 'Minions: The Rise of Gru'
+}).count()
+```
+
+2. Insert comment
+```
+db.comments.insertOne({
+  movieTitle: 'Minions: The Rise of Gru',
+  name: 'Ace',
+  rating: 5,
+  comment: 'Great Comedy'
+})
+```

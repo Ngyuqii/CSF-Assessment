@@ -11,7 +11,7 @@ import { ReviewService } from 'src/app/service/review.service';
 
 export class SearchreviewComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private router: Router, private reviewSvc: ReviewService) {}
+  constructor(private fb: FormBuilder, private reviewSvc: ReviewService, private router: Router) {}
 
   form!: FormGroup;
 
@@ -29,10 +29,13 @@ export class SearchreviewComponent implements OnInit {
   }
 
   //Retrieve form value
+  //Save searchkey in local storage
   //Nagivate user to reviews/{movie} page
   searchMovie(): void {
     const movieResult = this.form.value.movie;
     console.info(`>>>Inputs: ${movieResult}`);
-    this.router.navigate(['/reviews', movieResult])
+    localStorage.setItem("searchKey", movieResult);
+    this.router.navigate(['/reviews', movieResult]);
   }
+
 }

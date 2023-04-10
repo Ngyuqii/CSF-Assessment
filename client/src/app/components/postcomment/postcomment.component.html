@@ -8,7 +8,7 @@
             <td>Name:</td>
             <td>
               <input type="text" size="30" formControlName="name">
-              <div *ngIf="invalidControl('name')">
+              <div *ngIf="invalidControl('name')" class="error">
                   Please enter your name.
               </div>
             </td>
@@ -24,14 +24,14 @@
             <td>
                 <textarea rows="8" cols="30" formControlName="comment"></textarea>
             </td>
-            <div *ngIf="invalidControl('comment')">
+            <div *ngIf="invalidControl('comment')" class="error">
                 Please enter your comment.
             </div>
         </tr>
         <br>
         <tr>
             <td>
-                <button type="button">Back</button>
+                <button type="button" (click)="toReviewsList()">Back</button>
             </td> &nbsp;&nbsp;&nbsp;&nbsp;
             <td>
                 <button type="submit" [disabled]="form.invalid">Post</button>
@@ -40,9 +40,9 @@
 
 </form>
 
-<br><br>
+<!-- <br><br>
 <div>
     {{ obs | async | json }}
-</div>
+</div> -->
 
 </div>
